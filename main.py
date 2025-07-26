@@ -22,6 +22,9 @@ evo2_image = (
 
 app = modal.App("variant-analysis-evo2", image=evo2_image)
 
+volume = modal.Volume.from_name("hf_cache", create_if_missing=True)
+mount_path = "/root/.cache/huggingface"
+
 
 @app.function(gpu="H100", volumes={mount_path: volume})
 def run_brca1_analysis():
